@@ -37,7 +37,7 @@ router.get('/status', verifyToken, (req, res) => {
     const { user, token } = req.user; // Destructure user and token from req.user
   
     // Redirect to frontend with user and token in query parameters
-    const redirectUrl = `http://localhost:3000/?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`;
+    const redirectUrl = `https://symphonious-vacherin-831651.netlify.app/?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`;
     res.redirect(redirectUrl);
   });
   
@@ -48,7 +48,7 @@ router.get('/logout', (req, res) => {
         console.error('Logout error', err);
         return res.status(500).send('Logout failed');
       }
-      res.redirect('http://localhost:3000'); // Redirect after successful logout
+      res.redirect('https://symphonious-vacherin-831651.netlify.app/'); // Redirect after successful logout
     });
   });
 
