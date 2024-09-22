@@ -10,7 +10,7 @@ import cors from 'cors'
 dotenv.config();
 
 const app = express();
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['http://localhost:3000','https://symphonious-vacherin-831651.netlify.app'];
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
