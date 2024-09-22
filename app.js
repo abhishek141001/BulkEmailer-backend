@@ -37,7 +37,7 @@ app.use('/auth', authRoutes);
 app.use(bulkMail);
 
 app.get('/',(req,res)=>{
-    res.send(<h2>hello</h2>)
+    res.send('<h2>hello</h2>')
 })
 
 app.listen(5000, () => {
