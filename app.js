@@ -45,6 +45,7 @@ app.post('/api/tasks', upload.single('media'), (req, res) => {
   const media = req.file; // media file information
 
   // You can now save task data and media to your database
+  console.log('task',task)
   res.send('Task received successfully!');
 });
 app.get('/',(req,res)=>{
