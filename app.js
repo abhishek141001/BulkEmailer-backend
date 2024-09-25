@@ -7,9 +7,12 @@ import passportSetup from './config/passport.js';
 import authRoutes from './routes/auth.js';
 import bulkMail from './routes/bulkMail.js';
 import cors from 'cors'
+import multer from 'multer';
+
 dotenv.config();
 
 const app = express();
+const upload = multer({ dest: 'uploads/' });
 const allowedOrigins = ['http://localhost:3000','https://symphonious-vacherin-831651.netlify.app'];
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
@@ -35,7 +38,15 @@ app.use(passport.session());
 
 app.use('/auth', authRoutes);
 app.use(bulkMail);
+app.post('/api/tasks', upload.single('media'), (req, res) => {
+  const task = req.body.task;
+  const description = req.body.description;
+  const problem = req.body.problem;
+  const media = req.file; // media file information
 
+  // You can now save task data and media to your database
+  res.send('Task received successfully!');
+});
 app.get('/',(req,res)=>{
     res.send('<h2>hello</h2>')
 })
