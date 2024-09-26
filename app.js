@@ -68,7 +68,7 @@ app.post('/api/tasks', upload.single('media'), async (req, res) => {
 
     // Save the task in the database
     await newTask.save();
-
+console.log('Task saved successfully!')
     res.status(201).send('Task saved successfully!');
   } catch (error) {
     console.error(error);
