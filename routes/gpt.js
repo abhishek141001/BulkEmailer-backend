@@ -66,6 +66,7 @@ const getTasksForDate = async (today) => {
           });
   
           // Send the GPT-3.5 response to the client
+          console.log(response.json)
           res.json(response.data);
       } catch (error) {
           console.error(error);
