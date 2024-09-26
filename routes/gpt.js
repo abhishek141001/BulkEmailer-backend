@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import Task from '../models/Task.js'; // Ensure the path is correct based on your file structure
+import Task from '../modal/Task.js';// Ensure the path is correct based on your file structure
 
 dotenv.config();
 
