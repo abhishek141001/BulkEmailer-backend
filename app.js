@@ -50,7 +50,7 @@ app.use('/auth', authRoutes);
 app.use(bulkMail);
 app.post('/api/tasks', upload.single('media'), async (req, res) => {
   const { task, description, problem } = req.body;
-  const media = req.file;
+  // const media = req.file;
 
   try {
     // Create a new task entry in the database
@@ -58,12 +58,12 @@ app.post('/api/tasks', upload.single('media'), async (req, res) => {
       task,
       description,
       problem,
-      media: {
-        filename: media.filename,
-        path: media.path,
-        mimetype: media.mimetype,
-        size: media.size,
-      },
+      // media: {
+        // filename: media.filename,
+        // path: media.path,
+        // mimetype: media.mimetype,
+        // size: media.size,
+      // },
     });
 
     // Save the task in the database
