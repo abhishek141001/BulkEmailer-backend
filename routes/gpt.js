@@ -21,7 +21,7 @@ const prompt = ` I have an array of tasks that users have completed throughout t
 
 
 // Route to send prompt to GPT-3.5
-const getTasksForDate = async (date) => {
+const getTasksForDate = async (today) => {
     const startOfDay = new Date(date.setHours(0, 0, 0, 0));
     const endOfDay = new Date(date.setHours(23, 59, 59, 999));
   
