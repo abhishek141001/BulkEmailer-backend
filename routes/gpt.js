@@ -35,11 +35,11 @@ const getTasksForDate = async (date) => {
   
   // Route to get tasks for one day, send to GPT-3.5, and respond with the generated result
   gpt.post('/api/generate-tasks-summary', async (req, res) => {
-      const {  date } = req.body;
-  
+    //   const {  date } = req.body;
+    const today = new Date();
       try {
           // Fetch tasks for the provided date
-          const tasks = await getTasksForDate(new Date(date));
+          const tasks = await getTasksForDate(today);
   
           if (!tasks || tasks.length === 0) {
               return res.status(404).json({ message: 'No tasks found for the specified date.' });

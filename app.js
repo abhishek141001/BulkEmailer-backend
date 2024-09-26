@@ -60,12 +60,12 @@ app.post('/api/tasks', upload.single('media'), async (req, res) => {
       task,
       description,
       problem,
-      // media: {
-        // filename: media.filename,
-        // path: media.path,
-        // mimetype: media.mimetype,
-        // size: media.size,
-      // },
+      media: media ? {
+        filename: media.filename,
+        path: media.path,
+        mimetype: media.mimetype,
+        size: media.size
+      } : null,
     });
 
     // Save the task in the database
