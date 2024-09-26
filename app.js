@@ -9,6 +9,7 @@ import bulkMail from './routes/bulkMail.js';
 import cors from 'cors'
 import multer from 'multer';
 import Task from './modal/Task.js';
+import gpt from './routes/gpt.js';
 
 dotenv.config();
 
@@ -47,6 +48,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', authRoutes);
+app.use(gpt)
 app.use(bulkMail);
 app.post('/api/tasks', upload.single('media'), async (req, res) => {
   const { task, description, problem } = req.body;
