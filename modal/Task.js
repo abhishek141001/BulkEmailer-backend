@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const taskSchema = new mongoose.Schema({
   task: { type: String, required: true },
-  description: { type: String, required: true },
-  problem: { type: String, required: true },
+  description: { type: String},
+  problem: { type: String },
   createdAt: { type: Date, default: Date.now },  // Automatically captures creation date
 });
 
