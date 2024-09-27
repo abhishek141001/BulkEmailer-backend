@@ -2,14 +2,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import Task from '../modal/Task.js';// Ensure the path is correct based on your file structure
+import Task from '../modal/Task.js'; // Ensure the path is correct based on your file structure
 
 dotenv.config();
 
-const gpt = express.Router();
+const gemini = express.Router();
 
 // Middleware
-gpt.use(bodyParser.json());
+gemini.use(bodyParser.json());
 
 const prompt = `I have an array of tasks that users have completed throughout the day, which may vary in detail and scope. Please analyze this data and generate:
 1. A comprehensive work progress report that includes:
@@ -35,8 +35,8 @@ const getTasksForDate = async (today) => {
     });
 };
 
-// Route to get tasks for one day, send to GPT-3.5, and respond with the generated result
-gpt.post('/api/generate-tasks-summary', async (req, res) => {
+// Route to get tasks for one day, send to Gemini API, and respond with the generated result
+gemini.post('/api/generate-tasks-summary', async (req, res) => {
     const today = new Date(); // Get today's date
 
     try {
@@ -47,27 +47,28 @@ gpt.post('/api/generate-tasks-summary', async (req, res) => {
             return res.status(404).json({ message: 'No tasks found for today.' });
         }
 
-        // Create a formatted string from tasks to send to GPT-3.5
+        // Create a formatted string from tasks to send to the Gemini API
         const tasksSummary = tasks.map(task => 
             `Task: ${task.task}\nDescription: ${task.description}\nProblem: ${task.problem}\n\n`
         ).join('');
 
-        // Send the prompt and tasks to GPT-3.5
-        const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-            model: "gpt-3.5-turbo",
-            messages: [
-                { role: "user", content: prompt },
-                { role: "user", content: `Here are the tasks for today:\n\n${tasksSummary}` }
-            ],
-            max_tokens: 300, // Adjust max_tokens based on your needs
+        // Send the prompt and tasks to Gemini API
+        const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${process.env.GOOGLE_API_KEY}`, {
+            contents: [
+                {
+                    parts: [
+                        { text: `${prompt}\nHere are the tasks for today:\n\n${tasksSummary}` }
+                    ]
+                }
+            ]
         }, {
             headers: {
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
                 'Content-Type': 'application/json',
             }
         });
 
-        // Send the GPT-3.5 response to the client
+        // Send the Gemini response to the client
+        console.log(response.data)
         res.json(response.data);
     } catch (error) {
         console.error(error);
@@ -75,4 +76,4 @@ gpt.post('/api/generate-tasks-summary', async (req, res) => {
     }
 });
 
-export default gpt;
+export default gemini;
