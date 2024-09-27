@@ -43,7 +43,7 @@ router.get('/status', verifyToken, (req, res) => {
     
   
     // Redirect to frontend
-    res.redirect('https://your-frontend-url');
+    res.redirect('http://localhost:3000');
   });
   
 
