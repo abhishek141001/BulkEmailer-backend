@@ -37,7 +37,7 @@ router.get('/status', verifyToken, (req, res) => {
     const { user,token } = req.user; // Destructure user and token from req.user
     console.log(user,token)
     res.cookie('token', token, 'user',user,{
-      httpOnly: true, // Prevents client-side access to the cookie
+      httpOnly: false, // Prevents client-side access to the cookie
       secure: true, // Required for 'SameSite=None' to work
       sameSite: 'None', // Allow the cookie to be sent in cross-origin requests
     });
