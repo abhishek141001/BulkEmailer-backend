@@ -34,7 +34,8 @@ router.get('/status', verifyToken, (req, res) => {
 
   router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
   router.get('/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
-    const { user } = req.user; // Destructure user and token from req.user
+    const { user,token } = req.user; // Destructure user and token from req.user
+    console.log(user,token)
     res.cookie('token', token, 'user',user,{
       httpOnly: true, // Prevents client-side access to the cookie
       secure: true, // Required for 'SameSite=None' to work
