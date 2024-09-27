@@ -68,12 +68,13 @@ gemini.post('/api/generate-tasks-summary', async (req, res) => {
         });
 
         // Send the Gemini response to the client
-        console.log(response.data)
+        console.log(response.data);
         res.json(response.data);
     } catch (error) {
-        console.error(error);
+        console.error('Error details:', error.response ? error.response.data : error.message);
         res.status(500).json({ error: 'Something went wrong!' });
     }
 });
+
 
 export default gemini;
