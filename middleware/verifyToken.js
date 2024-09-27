@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 export const verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Extract the token from the header
+  const token = req.cookies.token; // Extract the token from the header
 
   if (!token) return res.status(401).json({ message: 'Token missing, access denied' });
 
